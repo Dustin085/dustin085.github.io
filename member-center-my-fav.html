@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心</title>
+    <link rel="stylesheet" href="./assets/css/styleByDustin.css">
+    <link rel="stylesheet" href="./assets/css/styleByJessy.css">
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.5/axios.min.js"
+        integrity="sha512-01Pe9P3mJM/4c80VuoYEGHlspKGbd9uWQe9HtdLsdTqV0CS1kz8ca44sinVEXEvlZNciMmsAjeEbm5ZxHC7yYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- funevent的react元件 -->
+    <script type="text/babel" src="./assets/js/Topbar.jsx"></script>
+    <script type="text/babel" src="./assets/js/Footer.jsx"></script>
+    <script type="text/babel" src="./assets/js/FloatBtnBox.jsx"></script>
+    <script type="text/babel" src="./assets/js/MemberCenterSidebar.jsx"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+        function App() {
+            const { useState, useEffect, useRef } = React;
+            // 重要，裝有會員中心子頁的id
+            const subPageIdRef = useRef("my-fav");
+            // 子頁id轉標題
+            const [subPageIdToTcTitle, setSubPageIdToTcTitle] = useState([]);
+            useEffect(() => {
+                // 抓id轉標題的json
+                axios.get("./assets/json/memberCenterSubPageIdToTitle.json")
+                    .then((response) => setSubPageIdToTcTitle(response.data))
+                    .catch((error) => console.log(error));
+            }, []);
+            // 接收到id轉標題後再改變標題
+            useEffect(() => {
+                subPageIdToTcTitle.forEach((item) => {
+                    if (item.id == subPageIdRef.current) {
+                        document.title = `會員中心-${item.tcTitle}`;
+                    }
+                });
+            }, [subPageIdToTcTitle]);
+
+            return <>
+                {/*為背景設計的wrap，直接讓body{overflow:hidden}在手機板會失效*/}
+                <div className="funevent-wrap">
+                    <Topbar noLocationSelector />
+                    <div className="member-center-bg-color-block">
+                        <div className="member-center-bg-color-block__block1"></div>
+                        <div className="member-center-bg-color-block__block2"></div>
+                        <div className="member-center-bg-color-block__block3"></div>
+                        <div className="member-center-bg-color-block__block4"></div>
+                    </div>
+                    <FloatBtnBox />
+                    <main>
+                        <section id="member-center">
+                            {/* 會員中心-側邊列 */}
+                            <MemberCenterSidebar subPage={subPageIdRef.current} />
+
+                            {/* 分頁內容寫在這邊 */}
+                            <div className="member-center-content member-center-myfavorite">
+                                <div className="favorite">
+                                    <h4 className="title">我的蒐藏</h4>
+                                </div>
+                                <div className="favorite2">
+                                    <div className="detail">
+                                        <div className="activity">
+                                            <h4>活動</h4>
+                                            <img src="./assets/images/Line 35.svg" alt="" />
+                                        </div>
+                                        <div className="host">
+                                            <h4>主辦單位</h4>
+                                        </div>
+                                    </div>
+                                    <div className="status">
+                                        <h4 className="subtitle">重新到舊</h4>
+                                        <img src="./assets/images/downarrow.svg" alt="" />
+                                    </div>
+                                </div>
+                                <div className="outsidecard">
+                                    <div className="funevent-event-card">
+                                        <a href="#" className="event-pic"
+                                            style={{ backgroundImage: "url(./assets/images/demo-event-pic/demo-event-pic-04.jpg)" }}>
+                                            <div className="inner-card">
+                                                <div className="start-box">
+                                                    <div className="tag tag--new">最新</div>
+                                                    <button type="button" className="fav-btn"></button>
+                                                </div>
+                                                <div className="date">
+                                                    <p>2024.08.20(日) 19:00</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div className="main-content">
+                                            <p className="category">戶外體驗</p>
+                                            <h2 className="event-title">夏日祭典：體驗日本最道地的煙火大會，古早童玩大集合~~</h2>
+                                            <div className="location">
+                                                <div className="map-pin-icon"></div>
+                                                <p className="location-text">臺北 · 信義區</p>
+                                            </div>
+                                        </div>
+                                        <div className="tag-rating-box">
+                                            <ul className="tag-list">
+                                                <li className="tag">#童玩</li>
+                                                <li className="tag">#日本</li>
+                                            </ul>
+                                            <p className="rating-score">4.9(351)</p>
+                                        </div>
+                                        <button className="funevent-btn sign-up-btn" type="button">我要報名</button>
+                                    </div>
+                                    <div className="funevent-event-card">
+                                        <a href="#" className="event-pic"
+                                            style={{ backgroundImage: "url(./assets/images/demo-event-pic/demo-event-pic-04.jpg)" }}>
+                                            <div className="inner-card">
+                                                <div className="start-box">
+                                                    <div className="tag tag--new">最新</div>
+                                                    <button type="button" className="fav-btn"></button>
+                                                </div>
+                                                <div className="date">
+                                                    <p>2024.08.20(日) 19:00</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div className="main-content">
+                                            <p className="category">戶外體驗</p>
+                                            <h2 className="event-title">夏日祭典：體驗日本最道地的煙火大會，古早童玩大集合~~</h2>
+                                            <div className="location">
+                                                <div className="map-pin-icon"></div>
+                                                <p className="location-text">臺北 · 信義區</p>
+                                            </div>
+                                        </div>
+                                        <div className="tag-rating-box">
+                                            <ul className="tag-list">
+                                                <li className="tag">#童玩</li>
+                                                <li className="tag">#日本</li>
+                                            </ul>
+                                            <p className="rating-score">4.9(351)</p>
+                                        </div>
+                                        <button className="funevent-btn sign-up-btn" type="button">已結束</button>
+                                    </div>
+                                    <div className="funevent-event-card">
+                                        <a href="#" className="event-pic"
+                                            style={{ backgroundImage: "url(./assets/images/demo-event-pic/demo-event-pic-04.jpg)" }}>
+                                            <div className="inner-card">
+                                                <div className="start-box">
+                                                    <div className="tag tag--new">最新</div>
+                                                    <button type="button" className="fav-btn"></button>
+                                                </div>
+                                                <div className="date">
+                                                    <p>2024.08.20(日) 19:00</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div className="main-content">
+                                            <p className="category">戶外體驗</p>
+                                            <h2 className="event-title">夏日祭典：體驗日本最道地的煙火大會，古早童玩大集合~~</h2>
+                                            <div className="location">
+                                                <div className="map-pin-icon"></div>
+                                                <p className="location-text">臺北 · 信義區</p>
+                                            </div>
+                                        </div>
+                                        <div className="tag-rating-box">
+                                            <ul className="tag-list">
+                                                <li className="tag">#童玩</li>
+                                                <li className="tag">#日本</li>
+                                            </ul>
+                                            <p className="rating-score">4.9(351)</p>
+                                        </div>
+                                        <button className="funevent-btn sign-up-btn" type="button">即將額滿</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Footer />
+                </div>
+            </>
+        }
+
+
+
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

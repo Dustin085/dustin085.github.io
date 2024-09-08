@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心-帳號管理</title>
+    <link rel="stylesheet" href="./assets/css/styleByDustin.css">
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.5/axios.min.js"
+        integrity="sha512-01Pe9P3mJM/4c80VuoYEGHlspKGbd9uWQe9HtdLsdTqV0CS1kz8ca44sinVEXEvlZNciMmsAjeEbm5ZxHC7yYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- funevent的react元件 -->
+    <script type="text/babel" src="./assets/js/Topbar.jsx"></script>
+    <script type="text/babel" src="./assets/js/Footer.jsx"></script>
+    <script type="text/babel" src="./assets/js/FloatBtnBox.jsx"></script>
+    <script type="text/babel" src="./assets/js/MemberCenterSidebar.jsx"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+        function App() {
+            const { useState, useEffect, useRef } = React;
+            // 重要，裝有會員中心子頁的id
+            const subPageIdRef = useRef("account-manage");
+            // 子頁id轉標題
+            const [subPageIdToTcTitle, setSubPageIdToTcTitle] = useState([]);
+            useEffect(() => {
+                // 抓id轉標題的json
+                axios.get("./assets/json/memberCenterSubPageIdToTitle.json")
+                    .then((response) => setSubPageIdToTcTitle(response.data))
+                    .catch((error) => console.log(error));
+            }, []);
+            // 接收到id轉標題後再改變標題
+            useEffect(() => {
+                subPageIdToTcTitle.forEach((item) => {
+                    if (item.id == subPageIdRef.current) {
+                        document.title = `會員中心-${item.tcTitle}`;
+                    }
+                });
+            }, [subPageIdToTcTitle]);
+
+
+            // 加入頁籤效果
+            useEffect(() => {
+                // 主要內容頁籤
+
+                // 會員基本資料修改
+                // 按鈕跳入表單
+                let infoEditBtnEle = document.querySelector("#member-info-edit-btn");     // 修改按鈕
+                let infoCancelBtnEle = document.querySelector("#member-info-cancel-btn"); // 取消按鈕
+                let infoSaveBtnEle = document.querySelector("#member-info-save-btn");     // 儲存(修改)按鈕
+                let infoContentEle = document.querySelector("#member-info-content");      // 基本資料頁面div
+                let infoEditEle = document.querySelector("#member-info-edit");            // 修改資料頁面div
+                // 按下編輯按鈕
+                infoEditBtnEle.onclick = () => {
+                    infoContentEle.classList.remove("active");
+                    infoEditEle.classList.add("active");
+                };
+                // 按下取消按鈕
+                infoCancelBtnEle.onclick = () => {
+                    infoEditEle.classList.remove("active");
+                    infoContentEle.classList.add("active");
+                };
+                // 按下儲存按鈕
+
+                // 會員管理的tab和tab content，加入eventListener
+                let tabBtnArr = document.querySelectorAll(".account-manage__tab-btn");
+                let tabContentArr = document.querySelectorAll(".account-manage__tab-content");
+                tabBtnArr.forEach((tabBtn, btnIndex) => {
+                    tabBtn.onclick = () => {
+                        switchActive(tabContentArr, btnIndex);
+                        switchActive(tabBtnArr, btnIndex);
+                    }
+                });
+                // 切換active的元素，arrToSwitch => 要修改的dom元素陣列，targetIndex => 要被加上active的index
+                function switchActive(arrToSwitch, targetIndex) {
+                    // 清除陣列中每個item的class: active
+                    arrToSwitch.forEach((arrEle) => {
+                        arrEle.classList.remove('active');
+                    });
+                    // 為陣列中指定index的元素加上class: active
+                    arrToSwitch[targetIndex].classList.add('active');
+                }
+            }, []);
+
+            return <>
+                {/*為背景設計的wrap，直接讓body{overflow:hidden}在手機板會失效*/}
+                <div className="funevent-wrap">
+                    <Topbar noLocationSelector />
+                    <div className="member-center-bg-color-block">
+                        <div className="member-center-bg-color-block__block1"></div>
+                        <div className="member-center-bg-color-block__block2"></div>
+                        <div className="member-center-bg-color-block__block3"></div>
+                        <div className="member-center-bg-color-block__block4"></div>
+                    </div>
+                    <FloatBtnBox />
+                    <main>
+                        <section id="member-center">
+                            {/* 會員中心-側邊列 */}
+                            <MemberCenterSidebar subPage={subPageIdRef.current} />
+
+                            {/* 分頁內容寫在這邊 */}
+                            <div className="member-center-content account-manage-content">
+                                <div className="account-manage__title-box">
+                                    <h2 className="account-manage__title">帳號管理</h2>
+                                    <p className="account-manage__subtitle">個人資料將嚴格保密且不公開，僅用於FunEvent提供個人化服務</p>
+                                </div>
+                                <ul className="account-manage__tab-box">
+                                    <li className="tab"><button className="account-manage__tab-btn active">基本資料</button></li>
+                                    <li className="tab"><button className="account-manage__tab-btn">綁定帳號</button></li>
+                                    <li className="tab"><button className="account-manage__tab-btn">信用卡資料</button></li>
+                                </ul>
+                                <div className="account-manage__tab-content-box">
+                                    <div className="account-manage__tab-content member-info active">
+                                        <div className="member-info-content active" id="member-info-content">
+                                            <p className="title">姓名</p>
+                                            <p className="info" id="membername">王曉明</p>
+                                            <div className="split-line-row"></div>
+                                            <p className="title">生日</p>
+                                            <p className="info" id="birthday">1999-9-19</p>
+                                            <div className="split-line-row"></div>
+                                            <p className="title">性別</p>
+                                            <p className="info" id="gender">生理男</p>
+                                            <div className="split-line-row"></div>
+                                            <p className="title">手機號碼</p>
+                                            <p className="info" id="phone-number">0999999999</p>
+                                            <div className="split-line-row"></div>
+                                            <p className="title">電子信箱</p>
+                                            <p className="info" id="email">testtest@gmail.com</p>
+                                            <div className="split-line-row"></div>
+                                            <p className="title">居住地址</p>
+                                            <p className="info" id="address">台北市中正區濟南路一段321號</p>
+                                            <div className="split-line-row"></div>
+                                            <button type="button" className="funevent-btn" id="member-info-edit-btn">編輯</button>
+                                        </div>
+                                        <div className="member-info-edit" id="member-info-edit">
+                                            <form className="member-info-form" action="" method="post" name="form__member-edit"
+                                                id="form__member--edit" title="會員資料修改表單">
+                                                <div className="member-info-box">
+                                                    <div>
+                                                        <label htmlFor="membername">姓氏<span>*</span></label>
+                                                        <input type="text" name="memberlastname" id="input-memberlastname" title="姓名欄位"
+                                                            placeholder="請輸入姓名" required />
+                                                    </div>
+                                                    <div>
+                                                        <label htmlFor="membername">名字<span>*</span></label>
+                                                        <input type="text" name="memberfirstname" id="input-memberfirstname"
+                                                            title="姓名欄位" placeholder="請輸入姓名" required />
+                                                    </div>
+                                                </div>
+                                                <div className="split-line-row"></div>
+                                                <div className="member-info-box">
+                                                    <div>
+                                                        <label htmlFor="birthday">生日<span>*</span></label>
+                                                        <input type="date" name="birthday" id="input-birthday" title="生日欄位" placeholder="請選擇生日" required />
+                                                    </div>
+                                                    <div>
+                                                        <label htmlFor="gender">性別<span>*</span></label>
+                                                        <select name="gender" id="input-gender" title="性別選項">
+                                                            <option value="">請選擇</option>
+                                                            <option value="生理男">生理男</option>
+                                                            <option value="生理女">生理女</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="split-line-row"></div>
+                                                <label htmlFor="mobile">手機號碼<span>*</span></label>
+                                                <input type="tel" name="mobile" id="input-mobile" title="手機號碼欄為" placeholder="共10碼"
+                                                    maxLength="10" required />
+                                                <div className="split-line-row"></div>
+                                                <label htmlFor="email">電子信箱<span>*</span></label>
+                                                <input type="email" name="email" id="input-email" title="email欄位"
+                                                    placeholder="請輸入電子郵件信箱" required />
+                                                <div className="split-line-row"></div>
+                                                <label htmlFor="address">居住地址<span>*</span></label>
+                                                <input type="text" name="address" id="input-address" title="居住地址欄位"
+                                                    placeholder="請輸入居住地址" required />
+                                                <div className="split-line-row"></div>
+                                                <div className="member-info-btn-box">
+                                                    <button type="button" className="funevent-btn" id="member-info-cancel-btn">取消</button>
+                                                    <button type="submit" className="funevent-btn" name="member-info-edit-btn" id="member-info-save-btn">儲存</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div className="account-manage__tab-content binded-account">
+                                        <div className="binded-account__wrap">
+                                            <div className="binded-account-card binded-account-card--binded">
+                                                <div className="binded-account-card__icon" style={{ backgroundImage: "url(./assets/images/google-icon-small.svg)" }}></div>
+                                                <div className="binded-account-card__company-box">
+                                                    <p className="binded-account-card__company">Google</p>
+                                                    <p className="binded-account-card__outside-account">testtest@gmail.com</p>
+                                                </div>
+                                                <button className="funevent-btn-round">解除</button>
+                                            </div>
+                                            <div className="binded-account-card binded-account-card--binded">
+                                                <div className="binded-account-card__icon" style={{ backgroundImage: "url(./assets/images/line-icon-small.svg)" }}></div>
+                                                <div className="binded-account-card__company-box">
+                                                    <p className="binded-account-card__company">Line</p>
+                                                    <p className="binded-account-card__outside-account">testtest@gmail.com</p>
+                                                </div>
+                                                <button className="funevent-btn-round">解除</button>
+                                            </div>
+                                            <div className="binded-account-card binded-account-card--unbinded">
+                                                <div className="binded-account-card__icon" style={{ backgroundImage: "url(./assets/images/fb-icon-small.svg)" }}></div>
+                                                <div className="binded-account-card__company-box">
+                                                    <p className="binded-account-card__company">Facebook</p>
+                                                    <p className="binded-account-card__outside-account"></p>
+                                                </div>
+                                                <button className="funevent-btn-round">綁定</button>
+                                            </div>
+                                            <div className="binded-account-card binded-account-card--unbinded">
+                                                <div className="binded-account-card__icon" style={{ backgroundImage: "url(./assets/images/apple-icon-small.svg)" }}></div>
+                                                <div className="binded-account-card__company-box">
+                                                    <p className="binded-account-card__company">Apple</p>
+                                                    <p className="binded-account-card__outside-account"></p>
+                                                </div>
+                                                <button className="funevent-btn-round">綁定</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="account-manage__tab-content credit-card-info">
+                                        <div className="credit-card-info-wrap">
+                                            <div className="credit-card-info-card credit-card-info-card--binded">
+                                                <div className="credit-card-info-card__icon" style={{ backgroundImage: "url(./assets/images/visa-icon-small.svg)" }}></div>
+                                                <p className="credit-card-info-card__number">**** **** **** 1234</p>
+                                                <button className="funevent-btn-round">刪除</button>
+                                            </div>
+                                            <button className="funevent-btn" id="credit-card-info-new-btn">新增卡片</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Footer />
+                </div>
+            </>
+        }
+
+
+
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

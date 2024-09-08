@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結帳頁面</title>
+    <link rel="stylesheet" href="../assets/css/styleForMemberCenterTemplate.css">
+    <link rel="stylesheet" href="../assets/css/styleByKuokuo.css">
+</head>
+
+<body>
+    <div class="funevent-wrap">
+
+
+        <!-- 導航列 -->
+        <header id="topbar">
+            <div class="topbar__start-box">
+                <h1 class="logo">
+                    <a href="../index.html">
+                        <figure class="logo-en"><img src="../assets/images/logo-en.svg" alt=""></figure>
+                        <figure class="logo-tc"><img src="../assets/images/logo-tc.svg" alt=""></figure>
+                    </a>
+                </h1>
+            </div>
+            <div class="topbar__end-box">
+                <nav class="navigation">
+                    <ul class="topbar-menu">
+                        <li class="topbar-menu__item">
+                            <div class="topbar-menu__icon"><img src="../assets/images/search-icon.svg" alt=""></div>
+                            <p>找活動</p>
+                        </li>
+                        <li class="topbar-menu__item">
+                            <div class="topbar-menu__icon"><img src="../assets/images/login-icon.svg" alt=""></div>
+                            <p>註冊/登入</p>
+                        </li>
+                        <li class="topbar-menu__item">
+                            <div class="topbar-menu__icon"><img src="../assets/images/ticket-icon.svg" alt=""></div>
+                            <p>辦活動</p>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <!-- 色塊背景 -->
+        <div class="member-center-bg-color-block">
+            <div class="member-center-bg-color-block__block1"></div>
+            <div class="member-center-bg-color-block__block2"></div>
+            <div class="member-center-bg-color-block__block3"></div>
+            <div class="member-center-bg-color-block__block4"></div>
+        </div>
+        <main>
+            <section>
+                <div class="order-details-up">
+                    <div class="step">
+                        <div class="step1"></div>
+                        <p>1.選擇方案</p>
+                    </div>
+                    <div class="step-hr"></div>
+                    <div class="step">
+                        <div class="step2"></div>
+                        <p>2.填寫資料</p>
+                    </div>
+                    <div class="step-hr"></div>
+                    <div class="step">
+                        <div class="step3-1"></div>
+                        <p>3.完成付款</p>
+                    </div>
+                    <div class="step-hr"></div>
+                    <div class="step">
+                        <div class="step4"></div>
+                        <p>4.領取票卷</p>
+                    </div>
+                </div>
+            </section>
+            <section id="order-details-down">
+                <div class="all-order-details">
+                    <!-- 左邊訂購人資料 -->
+                    <div class="left-order-details">
+                        <div class="orderdetails1">
+                            <h3 class="title">發票/收據</h3>
+                            <div class="split-line-row"></div>
+                            <div class="personal-info">
+                                <div class="input-name">
+                                    <h4>發票種類* </h4>
+                                    <input class="input4" type="text" placeholder="電子發票證明聯(個人戶)" required>
+                                </div>
+                            </div>
+                            <div class="personal-info">
+                                <div class="input-name">
+                                    <h4>公司統一編號* </h4>
+                                    <input class="input4" type="text" placeholder="請輸入統一編號" required maxlength="8">
+                                </div>
+                                <div class="input-name">
+                                    <h4>公司抬頭* </h4>
+                                    <input class="input4" type="text" placeholder="請填寫抬頭" required>
+                                </div>
+                            </div>
+                            <div class="personal-btn"><input
+                                    type="checkbox">&nbsp;我同意辦理退費時，由FunEvent代為處理發票及銷貨退回證明單，以加速退款作業。</div>
+                        </div>
+                        <div class="orderdetails1">
+                            <h3 class="title">付款方式</h3>
+                            <div class="split-line-row"></div>
+                            <div class="personal-btn"><input type="radio" name="contact">&nbsp;信用卡/簽帳金融卡&nbsp;
+                                <div class="credit-card1"></div>
+                                <div class="credit-card2"></div>
+                                <div class="credit-card3"></div>
+                                <div class="credit-card4"></div>
+                            </div>
+                            <div class="personal-info">
+                                <div class="input-name">
+                                    <h4>卡號* </h4>
+                                    <div class="input-card">
+                                        <input class="input3" type="text" placeholder="請輸入" required maxlength="4">
+                                        <p>-</p>
+                                        <input class="input3" type="text" placeholder="請輸入" required maxlength="4">
+                                        <p>-</p>
+                                        <input class="input3" type="text" placeholder="請輸入" required maxlength="4">
+                                        <p>-</p>
+                                        <input class="input3" type="text" placeholder="請輸入" required maxlength="4" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="personal-info2">
+                                <div class="input-name">
+                                    <h4>有效年月* </h4>
+                                    <div class="input-card">
+                                        <input class="input3" type="text" placeholder="MM" required maxlength="4">
+                                        <p>/</p>
+                                        <input class="input3" type="text" placeholder="YYYY" required maxlength="4">
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div class="input-name">
+                                    <h4>卡片末三碼* </h4>
+                                    <div class="input-card">
+                                        <input class="input3" type="text" placeholder="CVV" required maxlength="3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="personal-btn"><input type="radio" name="contact">&nbsp;ATM轉帳</div>
+                            <div class="things-to-note"><small>注意事項：<br>
+                                    <li>付款前，請仔細核對您的訂單內容，包括票種、數量、日期和時間等資訊，確保無誤。</li>
+                                    <li>請保存好所有與訂票相關的確認電郵、支付憑證和交易記錄，以便日後核對或退換票使用。</li>
+                                    <li>部分付款方式（如ATM轉帳）有時間限制，請務必在期限內完成付款，以免訂單失效。</li>
+                                    <li>部分活動票券可能會有轉讓或退票限制，請提前了解相關規定，避免不必要的損失。</li>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="orderdetails1">
+                            <div class="personal-btn">
+                                <input type="checkbox">&nbsp;我(或監護人)已詳閱並同意<p class="fake-agree"><a
+                                        href="#"></a>買賣契約書</p>
+                            </div>
+                            <div class="personal-btn">
+                                <input type="checkbox">&nbsp;此網站的表單僅供練習展示，不具備收集或儲存資料的功能，詳情請見<p class="fake-agree"><a href="#"></a>使用條款</p>。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 右邊訂單明細 -->
+                <div class="right-order-details">
+                    <div class="right-orderdetails">
+                        <div class="pay-orderdetails">
+                            <h3 class="title">訂單明細</h3>
+                            <div class="split-line-row"></div>
+                            <div class="right-pic">
+                                <img src="../assets/images/event01/event1-pic01.jpg" alt="">
+                                <div class="right-tickets-info">
+                                    <h4>流行音樂與民謠吉他-第一堂吉他課的首選</h4>
+                                    <p>親子一同彈</p>
+                                    <div class="tickets-info">
+                                        <p>票卷x2</p>
+                                        <p>NT$ 1000</p>
+                                    </div>
+                                    <!-- <div class="tickets-info">
+                                        <p>兒童x2</p>
+                                        <p>NT$ 400</p>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="split-line-row"></div>
+                            <div>
+                                <div class="price-box">
+                                    <small>點數獲得</small>
+                                    <div class="point-box">
+                                        <p>10</p>
+                                        <div class="pay-point-y"></div>
+                                    </div>
+                                </div>
+                                <div class="price-box">
+                                    <p>總金額</p>
+                                    <div class="price">
+                                        <p>NT$</p>
+                                        <p>1000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="pay-btn" type="submit">立即付款</button>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+    </main>
+    <footer>
+        <!-- 主選單 -->
+        <nav class=" navigation">
+            <ul class="menu">
+                <li>
+                    <!-- 主按鈕 -->
+                    <h3>認識FUNEVENT</h3>
+
+                    <!-- 子選單  -->
+                    <ul>
+                        <li><a href="#">關於我們</a></li>
+                        <li><a href="#">親子園地</a></li>
+                        <li><a href="#">活動情報</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- 主按鈕 -->
+                    <h3>購票須知</h3>
+                    <!-- 子選單 -->
+                    <ul>
+                        <li><a href="#">如何訂購</a></li>
+                        <li><a href="#">如何取票</a></li>
+                        <li><a href="#">如何退票</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- 主按鈕 -->
+                    <h3>客戶須知</h3>
+                    <!-- 子選單 -->
+                    <ul>
+                        <li><a href="#">服務條款</a></li>
+                        <li><a href="#">隱私權政策</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- 主按鈕 -->
+                    <h3>主辦方中心</h3>
+                    <!-- 子選單 -->
+                    <ul>
+                        <li><a href="#">舉辦活動</a></li>
+                        <li><a href="#">上架規範</a></li>
+                        <li><a href="#">廣告曝光</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- 主按鈕 -->
+                    <h3>客服中心</h3>
+                    <!-- 子選單 -->
+                    <ul>
+                        <li><a href="#">線上客服</a></li>
+                        <li><a href="#">常見問題</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="app-box">
+                        <p>下載FunEvent APP</p>
+                        <div class="download">
+                            <a href="#" class="google"></a>
+                            <a href="#" class="iphone"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </nav>
+        <div class="split-line-row"></div>
+        <div class="end-box">
+            <h1><a href="./index.html"><img src="../assets/images/logo-big.svg" alt=" "></a></h1>
+            <small>COPYRIGHT &copy; 2024 FunEvent All rights reserved.</small>
+            <div class="icon-box">
+                <div class="icon" style="background-image: url(../assets/images/fb-icon.svg);"></div>
+                <div class="icon" style="background-image: url(../assets/images/ig-icon.svg);"></div>
+                <div class="icon" style="background-image: url(../assets/images/threads-icon.svg);"></div>
+            </div>
+        </div>
+        <!-- 弧形背景 -->
+        <div class="bg-color-block"></div>
+    </footer>
+    </div>
+    <script>
+        // 先直接跳轉到我的票卷
+        document.querySelector(".pay-btn").addEventListener("click", () => {
+            location.href = "../member-center-my-ticket.html";
+        });
+    </script>
+</body>
+
+</html>

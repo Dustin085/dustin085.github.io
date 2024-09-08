@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心-模板</title>
+    <link rel="stylesheet" href="../assets/css/styleForMemberCenterTemplate.css">
+</head>
+
+<body>
+    <div class="funevent-wrap">
+
+
+        <!-- 導航列 -->
+        <header id="topbar">
+            <div class="topbar__start-box">
+                <h1 class="logo">
+                    <a href="../index.html">
+                        <figure class="logo-en"><img src="../assets/images/logo-en.svg" alt=""></figure>
+                        <figure class="logo-tc"><img src="../assets/images/logo-tc.svg" alt=""></figure>
+                    </a>
+                </h1>
+                <div class="topbar__location">
+                    <figure class="topbar__map-pin-icon"><img src="../assets/images/map-pin-icon.svg" alt="地圖圖釘icon">
+                    </figure>
+                    <p>雙北</p>
+                </div>
+            </div>
+            <div class="topbar__end-box">
+                <nav class="navigation">
+                    <ul class="topbar-menu">
+                        <li class="topbar-menu__item">
+                            <div class="topbar-menu__icon"><img src="../assets/images/search-icon.svg" alt=""></div>
+                            <p>找活動</p>
+                        </li>
+                        <li class="topbar-menu__item">
+                            <div class="topbar-menu__icon"><img src="../assets/images/login-icon.svg" alt=""></div>
+                            <p>註冊/登入</p>
+                        </li>
+                        <li class="topbar-menu__item">
+                            <div class="topbar-menu__icon"><img src="../assets/images/ticket-icon.svg" alt=""></div>
+                            <p>辦活動</p>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <!-- 色塊背景 -->
+        <div class="member-center-bg-color-block">
+            <div class="member-center-bg-color-block__block1"></div>
+            <div class="member-center-bg-color-block__block2"></div>
+            <div class="member-center-bg-color-block__block3"></div>
+            <div class="member-center-bg-color-block__block4"></div>
+        </div>
+        <main>
+            <section id="member-center">
+                <!-- 側邊列 -->
+                <nav class="member-center-sidebar">
+                    <!-- 會員頭貼與名字 -->
+                    <div class="member-center-sidebar__intro">
+                        <div class="member-avatar-box">
+                            <figure class="member-center-sidebar__avatar"><img
+                                    src="../assets/images/member-default-avatar.png" alt=""></figure>
+                            <button type="button" class="edit-member-avatar-btn"><object
+                                    data="../assets/images/edit-avatar-icon.svg" type="image/svg+xml"></object></button>
+                        </div>
+                        <h3 class="member-center-sidebar__name">會員名字</h3>
+                        <a href="#" class="member-center-sidebar__edit-link">管理個人資料</a>
+                    </div>
+                    <!-- member-center-sidebar__menu -->
+                    <div class="member-center-sidebar__menu">
+                        <!-- div.myEvent_box>h4+div.member-center-sidebar__link-box*3>div.icon--small+a -->
+                        <div class="member-center-sidebar__list-box">
+                            <h4>我的活動</h4>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">我的票卷</a>
+                            </div>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">Fun點數</a>
+                            </div>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">Fun折價卷</a>
+                            </div>
+                        </div>
+                        <div class="split-line-row"></div>
+                        <div class="member-center-sidebar__list-box">
+                            <h4>帳號設定</h4>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">帳號管理</a>
+                            </div>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">我的評論</a>
+                            </div>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">我的蒐藏</a>
+                            </div>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">訊息管理</a>
+                            </div>
+                        </div>
+                        <div class="split-line-row"></div>
+                        <div class="member-center-sidebar__list-box">
+                            <h4>主辦中心</h4>
+                            <div class="member-center-sidebar__link-box">
+                                <div class="icon--small"></div>
+                                <a href="#">帳號切換</a>
+                            </div>
+                        </div>
+
+                        <button class="btn-logout--large funevent-btn" type="button">登出</button>
+                    </div>
+                </nav>
+
+                <!-- 分頁內容寫在這邊 -->
+                <div class="member-center-content">
+                    <!-- 請在上面的div加入分頁的class -->
+                </div>
+            </section>
+        </main>
+        <footer>
+            <!-- 主選單 -->
+            <nav class=" navigation">
+                <ul class="menu">
+                    <li>
+                        <!-- 主按鈕 -->
+                        <h3>認識FUNEVENT</h3>
+
+                        <!-- 子選單  -->
+                        <ul>
+                            <li><a href="#">關於我們</a></li>
+                            <li><a href="#">親子園地</a></li>
+                            <li><a href="#">活動情報</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <!-- 主按鈕 -->
+                        <h3>購票須知</h3>
+                        <!-- 子選單 -->
+                        <ul>
+                            <li><a href="#">如何訂購</a></li>
+                            <li><a href="#">如何取票</a></li>
+                            <li><a href="#">如何退票</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <!-- 主按鈕 -->
+                        <h3>客戶須知</h3>
+                        <!-- 子選單 -->
+                        <ul>
+                            <li><a href="#">服務條款</a></li>
+                            <li><a href="#">隱私權政策</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <!-- 主按鈕 -->
+                        <h3>主辦方中心</h3>
+                        <!-- 子選單 -->
+                        <ul>
+                            <li><a href="#">舉辦活動</a></li>
+                            <li><a href="#">上架規範</a></li>
+                            <li><a href="#">廣告曝光</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <!-- 主按鈕 -->
+                        <h3>客服中心</h3>
+                        <!-- 子選單 -->
+                        <ul>
+                            <li><a href="#">線上客服</a></li>
+                            <li><a href="#">常見問題</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="app-box">
+                            <p>下載FunEvent APP</p>
+                            <div class="download">
+                                <a href="#" class="google"></a>
+                                <a href="#" class="iphone"></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </nav>
+            <div class="split-line-row"></div>
+            <div class="end-box">
+                <h1><a href="./index.html"><img src="../assets/images/logo-big.svg" alt=" "></a></h1>
+                <small>COPYRIGHT &copy; 2024 FunEvent All rights reserved.</small>
+                <div class="icon-box">
+                    <div class="icon" style="background-image: url(../assets/images/fb-icon.svg);"></div>
+                    <div class="icon" style="background-image: url(../assets/images/ig-icon.svg);"></div>
+                    <div class="icon" style="background-image: url(../assets/images/threads-icon.svg);"></div>
+                </div>
+            </div>
+            <!-- 弧形背景 -->
+            <div class="bg-color-block"></div>
+        </footer>
+    </div>
+</body>
+
+</html>

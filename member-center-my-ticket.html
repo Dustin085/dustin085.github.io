@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心</title>
+    <link rel="stylesheet" href="./assets/css/styleByDustin.css">
+    <link rel="stylesheet" href="./assets/css/styleByKuokuo.css">
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.5/axios.min.js"
+        integrity="sha512-01Pe9P3mJM/4c80VuoYEGHlspKGbd9uWQe9HtdLsdTqV0CS1kz8ca44sinVEXEvlZNciMmsAjeEbm5ZxHC7yYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- funevent的react元件 -->
+    <script type="text/babel" src="./assets/js/Topbar.jsx"></script>
+    <script type="text/babel" src="./assets/js/Footer.jsx"></script>
+    <script type="text/babel" src="./assets/js/FloatBtnBox.jsx"></script>
+    <script type="text/babel" src="./assets/js/MemberCenterSidebar.jsx"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+        function App() {
+            const { useState, useEffect, useRef } = React;
+            // 重要，裝有會員中心子頁的id
+            const subPageIdRef = useRef("my-ticket");
+            // 子頁id轉標題
+            const [subPageIdToTcTitle, setSubPageIdToTcTitle] = useState([]);
+            useEffect(() => {
+                // 抓id轉標題的json
+                axios.get("./assets/json/memberCenterSubPageIdToTitle.json")
+                    .then((response) => setSubPageIdToTcTitle(response.data))
+                    .catch((error) => console.log(error));
+            }, []);
+            // 接收到id轉標題後再改變標題
+            useEffect(() => {
+                subPageIdToTcTitle.forEach((item) => {
+                    if (item.id == subPageIdRef.current) {
+                        document.title = `會員中心-${item.tcTitle}`;
+                    }
+                });
+            }, [subPageIdToTcTitle]);
+
+            return <>
+                {/*為背景設計的wrap，直接讓body{overflow:hidden}在手機板會失效*/}
+                <div className="funevent-wrap">
+                    <Topbar noLocationSelector />
+                    <div className="member-center-bg-color-block">
+                        <div className="member-center-bg-color-block__block1"></div>
+                        <div className="member-center-bg-color-block__block2"></div>
+                        <div className="member-center-bg-color-block__block3"></div>
+                        <div className="member-center-bg-color-block__block4"></div>
+                    </div>
+                    <FloatBtnBox />
+                    <main>
+                        <section id="member-center">
+                            {/* 會員中心-側邊列 */}
+                            <MemberCenterSidebar subPage={subPageIdRef.current} />
+
+                            {/* 分頁內容寫在這邊 */}
+                            <div className="member-center-content member-center-myticket">
+                                <div className="all-iten">
+                                    <h3 className="title">我的票卷</h3>
+                                    <div className="selection-and-filter">
+                                        <ul className="selection-bar-all">
+                                            <li><a href="#" className="selection-bar">即將到來</a></li>
+                                            <li><a a href="#" className="selection-bar">歷史紀錄</a></li>
+                                            <li><a a href="#" className="selection-bar">取消中/已取消</a></li>
+                                        </ul>
+                                        <div className="choose">
+                                            <li a href="#">重新到舊</li>
+                                            <button className="filter"></button>
+                                        </div>
+                                    </div>
+
+                                    <div className="event">
+                                        <div className="event-pic"></div>
+                                        <div className="event-info-address-button">
+
+                                            <div>
+
+                                            </div><div className="tickets">
+                                                <p>共兩張</p>
+                                            </div>
+
+                                            <div className="event-info-and-button">
+                                                <div className="event-information">
+                                                    <small>2024.10.06(日)</small>
+                                                    <h3>流行音樂與民謠吉他-第一堂吉他課的首選</h3>
+                                                    <p>親子一同彈:上午場x1</p>
+                                                </div>
+                                                <div className="address-and-button">
+                                                    <div className="address-pin">
+                                                        <div className="pin"></div>
+                                                        <small>臺北市中山區搖滾路一段321號</small>
+                                                    </div>
+                                                    <div className="two-button">
+                                                        <button className="button-order">訂單詳情</button>
+                                                        <button className="button-order">
+                                                            <img src="./assets/images/icon-new/電子票.svg" alt="電子票" />
+                                                            電子票
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <Footer />
+                </div>
+            </>
+        }
+
+
+
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>

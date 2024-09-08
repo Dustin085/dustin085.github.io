@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜尋結果 活動趣 FunEvent</title>
+    <link rel="stylesheet" href="./assets/css/styleByDustin.css">
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.5/axios.min.js"
+        integrity="sha512-01Pe9P3mJM/4c80VuoYEGHlspKGbd9uWQe9HtdLsdTqV0CS1kz8ca44sinVEXEvlZNciMmsAjeEbm5ZxHC7yYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- funevent的react元件 -->
+    <script type="text/babel" src="./assets/js/Topbar.jsx"></script>
+    <script type="text/babel" src="./assets/js/FuneventEventCard.jsx"></script>
+    <script type="text/babel" src="./assets/js/Footer.jsx"></script>
+    <script type="text/babel" src="./assets/js/FloatBtnBox.jsx"></script>
+    <script type="text/babel" src="./assets/js/SearchFilterBoard.jsx"></script>
+    <!-- TODO -->
+    <!-- 金額篩選器 -->
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+
+        function App() {
+            const { useState, useEffect } = React;
+
+            // 搜尋關鍵字
+            const [searchKeyWord, setSearchKeyWord] = useState("關鍵字");
+            // 後端傳回的搜尋結果
+            const [searchResultJson, setSearchResultJson] = useState([]);
+            // 側邊篩選板要用的分類資訊和地區資訊
+            const [categoryDataArr, setCategoryDataArr] = useState([]);
+            const [twLocationList, setTwLocationList] = useState([]);
+
+            // 搜尋關鍵字改變時同步改變分頁標題
+            useEffect(() => {
+                document.title = `搜尋：${searchKeyWord} 活動趣 FunEvent`;
+            }, [searchKeyWord])
+            // 第一次渲染完後要做的事情
+            useEffect(() => {
+                // 假設使用者搜尋了民謠吉他
+                setSearchKeyWord("民謠吉他");
+                // 抓搜尋結果json
+                const getSearchData = async () => {
+                    const result = await axios.get("./assets/json/eventInfoForSearchPage.json");
+                    setSearchResultJson(result.data);
+                    // console.log(result.data);
+                }
+                // 抓側面板活動分類json
+                const getCategoryData = async () => {
+                    const result = await axios.get("./assets/json/eventCategoryCardInfo.json");
+                    let categoryArr = [];
+                    Array.from(result.data).map((item) => {
+                        categoryArr.push(item.title);
+                    });
+                    setCategoryDataArr(categoryArr);
+                    // console.log(categoryArr);
+                }
+                // 抓側面板地區json
+                const getLocationData = async () => {
+                    const result = await axios.get("./assets/json/twLocationList.json");
+                    setTwLocationList(result.data);
+                    // console.log(result.data);
+                }
+                getSearchData();
+                getCategoryData();
+                getLocationData();
+            }, []);
+            return <>
+                {/*為背景設計的wrap，直接讓body{overflow:hidden}在手機板會失效*/}
+                <div className="funevent-wrap">
+                    <Topbar isAltColor noLocationSelector />
+                    <FloatBtnBox />
+                    <main className="search-page-main">
+                        <div className="search-page-wrap">
+                            {/* 麵包屑 */}
+                            <div className="breadcrumb deep" >
+                                <a href="../index.html">首頁</a>
+                                <span className="divider"> / </span>
+                                <a href="#">關鍵字</a>
+                            </div>
+                            {/* 搜尋結果大標題 */}
+                            <div className="search-info">
+                                <p className="title">
+                                    <span>搜尋結果：</span>
+                                    <span className="keyword">{searchKeyWord}</span>
+                                </p>
+                            </div>
+
+                            <div className="search-content-container">
+                                {/* 側邊列 */}
+                                <div className="sidebar-box">
+                                    <SearchFilterBoard title="活動分類" filterNames={categoryDataArr} boardId="eventCategory" />
+                                    {/* 這之間有個金額篩選器，之後做 */}
+                                    <SearchFilterBoard title="地區" filterNames={twLocationList} boardId="location" />
+                                </div>
+                                {/* 搜尋結果區 */}
+                                <div className="search-result-box">
+                                    <div className="result-info-box funevent-shadow">
+                                        <p className="search-result-info">找到113項結果</p>
+                                        <select className="search-filter" name="search-filter" id="search-filter">
+                                            <option value="new-to-old">從新到舊</option>
+                                            <option value="price-low-to-high">價格↓</option>
+                                            <option value="price-high-to-low">價格↑</option>
+                                            <option value="hottest">最熱門</option>
+                                        </select>
+                                    </div>
+                                    <div className="search-result-event-card-box">
+                                        {
+                                            searchResultJson.map((event) => {
+                                                const { id, eventImgUrl, eventState, date, category, title, location, tags, ratingScore } = event
+                                                return <FuneventEventCard
+                                                    key={id}
+                                                    eventImgUrl={eventImgUrl}
+                                                    eventState={eventState}
+                                                    date={date}
+                                                    category={category}
+                                                    title={title}
+                                                    location={location}
+                                                    tags={tags}
+                                                    ratingScore={ratingScore} />
+                                            })
+                                        }
+                                    </div>
+                                    <div className="page-indicator-box">
+                                        <button className="page-btn prev-page-btn" type="button"></button>
+                                        <button type="button" className="page-indicator active">1</button>
+                                        <button type="button" className="page-indicator">2</button>
+                                        <button type="button" className="page-indicator">3</button>
+                                        <button className="page-btn next-page-btn" type="button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                </div>
+            </>
+        }
+
+
+
+
+        ReactDOM
+            .createRoot(document.getElementById("root"))
+            .render(<App />);
+    </script>
+</body>
+
+</html>
