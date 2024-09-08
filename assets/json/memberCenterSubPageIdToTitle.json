@@ -1,0 +1,34 @@
+[
+    {
+        "id": "my-ticket",
+        "tcTitle": "我的票卷"
+    },
+    {
+        "id": "fun-point",
+        "tcTitle": "Fun點數"
+    },
+    {
+        "id": "fun-coupon",
+        "tcTitle": "Fun折價卷"
+    },
+    {
+        "id": "account-manage",
+        "tcTitle": "帳號管理"
+    },
+    {
+        "id": "my-comment",
+        "tcTitle": "我的評論"
+    },
+    {
+        "id": "my-fav",
+        "tcTitle": "我的蒐藏"
+    },
+    {
+        "id": "messenge-manage",
+        "tcTitle": "訊息管理"
+    },
+    {
+        "id": "founder-center",
+        "tcTitle": "帳號切換"
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "eventImgUrl": "./assets/images/event-pic/river.jpg",
+        "eventState": "hot",
+        "date": "2025.05.11(六) 10:00",
+        "category": "戶外活動",
+        "title": "【夏日營隊】溪邊玩水趣，水上活動大挑戰！",
+        "location": "台中 · 清水區",
+        "tags": [
+            "#競賽",
+            "#團體合作"
+        ],
+        "ratingScore": "4.5(151)"
+    },
+    {
+        "id": 2,
+        "eventImgUrl": "./assets/images/event-pic/plant.jpg",
+        "eventState": "hot",
+        "date": "2024.06.17(六) 10:00",
+        "category": "戶外體驗",
+        "title": "【認識植物】走進鄉間大發現，揭開植物的神秘面紗",
+        "location": "宜蘭 · 羅東",
+        "tags": [
+            "#大自然",
+            "#親近土地"
+        ],
+        "ratingScore": "4.1(251)"
+    },
+    {
+        "id": 3,
+        "eventImgUrl": "./assets/images/event-pic/bookmark.jpg",
+        "eventState": "hot",
+        "date": "2024.09.01(六) 13:00",
+        "category": "手作體驗",
+        "title": "創意手作之旅：精美書籤手作工作坊",
+        "location": "新北 · 新莊區",
+        "tags": [
+            "#DIY",
+            "#動手做"
+        ],
+        "ratingScore": "4.3(51)"
+    },
+    {
+        "id": 4,
+        "eventImgUrl": "./assets/images/event-pic/football.jpg",
+        "eventState": "new",
+        "date": "2025.07.23(六) 10:00",
+        "category": "活力運動",
+        "title": "踢踢足球：以遊戲帶入教學並享受踢球的樂趣~~",
+        "location": "臺北 · 松山區",
+        "tags": [
+            "#手腳協調能力",
+            "#鍛鍊體能"
+        ],
+        "ratingScore": "4.9(351)"
+    }
+]

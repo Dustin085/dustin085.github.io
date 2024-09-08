@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="_圖層_1" data-name="圖層_1">
+      <g id="_圖層_2">
+        <g id="ICON">
+          <circle class="cls-1" cx="23.9" cy="13.4" r="13.4"/>
+          <path class="cls-1" d="M45.3,48H2.7c-1.2,0-2.1-1-1.9-2.1,1.6-8.4,11.3-15,23.3-15s21.8,6.4,23.1,15c.2,1.2-.8,2.1-1.9,2.1h0Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

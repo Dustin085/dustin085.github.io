@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "eventImgUrl": "./assets/images/event-pic/chess.jpg",
+        "eventState": "hot",
+        "date": "2024.09.11(六) 10:00",
+        "category": "生活體驗",
+        "title": "【夏日營隊】透過下棋陶冶性情，培養專注度！",
+        "location": "新北 · 永和",
+        "tags": [
+            "#訓練專注",
+            "#訓練沉穩性格"
+        ],
+        "ratingScore": "4.5(161)"
+    },
+    {
+        "id": 2,
+        "eventImgUrl": "./assets/images/event-pic/painting.jpg",
+        "eventState": "hot",
+        "date": "2024.10.01(六) 10:00",
+        "category": "藝術人文",
+        "title": "【小小畢卡索】走進色彩的繽紛世界，盡情抒發於創作之中!",
+        "location": "台北 · 南港",
+        "tags": [
+            "#美學",
+            "#藝術培養"
+        ],
+        "ratingScore": "4.9(241)"
+    },
+    {
+        "id": 3,
+        "eventImgUrl": "./assets/images/event-pic/piano.jpg",
+        "eventState": "hot",
+        "date": "2024.08.16(日) 10:00",
+        "category": "音樂律動",
+        "title": "親子共彈：培養藝術氣息，鋼琴演奏工作坊",
+        "location": "新北 · 新店",
+        "tags": [
+            "#一對一",
+            "#不須基礎"
+        ],
+        "ratingScore": "4.0(536)"
+    },
+    {
+        "id": 4,
+        "eventImgUrl": "./assets/images/event-pic/photograph.jpg",
+        "eventState": "hot",
+        "date": "2024.12.11(六) 10:00",
+        "category": "數位科技",
+        "title": "專業攝影：多元主題實拍，景光色的解析~~",
+        "location": "臺北 · 信義",
+        "tags": [
+            "#美感養成",
+            "#攝影"
+        ],
+        "ratingScore": "4.1(374)"
+    }
+]
